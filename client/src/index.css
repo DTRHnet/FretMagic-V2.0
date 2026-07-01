@@ -1,0 +1,242 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+/* Loaded via index.html */
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+@theme inline {
+  /* Charcoal / Dark Guitar Aesthetic */
+  --color-background: oklch(0.12 0.005 260);
+  --color-foreground: oklch(0.93 0.01 80);
+  --color-card: oklch(0.16 0.006 260);
+  --color-card-foreground: oklch(0.93 0.01 80);
+  --color-popover: oklch(0.15 0.006 260);
+  --color-popover-foreground: oklch(0.93 0.01 80);
+
+  /* Amber/Gold Primary */
+  --color-primary: oklch(0.72 0.16 65);
+  --color-primary-foreground: oklch(0.12 0.005 260);
+
+  /* Muted charcoal secondary */
+  --color-secondary: oklch(0.22 0.008 260);
+  --color-secondary-foreground: oklch(0.80 0.01 80);
+
+  --color-muted: oklch(0.20 0.007 260);
+  --color-muted-foreground: oklch(0.55 0.01 80);
+
+  /* Amber accent */
+  --color-accent: oklch(0.65 0.14 60);
+  --color-accent-foreground: oklch(0.12 0.005 260);
+
+  --color-destructive: oklch(0.55 0.22 25);
+  --color-destructive-foreground: oklch(0.98 0 0);
+
+  --color-border: oklch(0.25 0.008 260);
+  --color-input: oklch(0.20 0.007 260);
+  --color-ring: oklch(0.72 0.16 65);
+
+  /* Chart colors */
+  --color-chart-1: oklch(0.72 0.16 65);
+  --color-chart-2: oklch(0.60 0.14 200);
+  --color-chart-3: oklch(0.65 0.18 140);
+  --color-chart-4: oklch(0.62 0.16 300);
+  --color-chart-5: oklch(0.68 0.18 30);
+
+  /* Sidebar */
+  --color-sidebar: oklch(0.10 0.005 260);
+  --color-sidebar-foreground: oklch(0.80 0.01 80);
+  --color-sidebar-primary: oklch(0.72 0.16 65);
+  --color-sidebar-primary-foreground: oklch(0.12 0.005 260);
+  --color-sidebar-accent: oklch(0.18 0.007 260);
+  --color-sidebar-accent-foreground: oklch(0.80 0.01 80);
+  --color-sidebar-border: oklch(0.22 0.008 260);
+  --color-sidebar-ring: oklch(0.72 0.16 65);
+
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Rajdhani", system-ui, sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, oklch(0.18 0.02 65 / 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, oklch(0.15 0.015 260 / 0.12) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-background; }
+  ::-webkit-scrollbar-thumb { @apply bg-border rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-muted-foreground/40; }
+}
+
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Flex min-size fix */
+  .flex { min-width: 0; min-height: 0; }
+
+  /* Container */
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1280px;
+  }
+
+  /* Gold gradient text */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, oklch(0.82 0.18 75), oklch(0.65 0.16 55));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effects */
+  .glow-amber {
+    box-shadow: 0 0 20px oklch(0.72 0.16 65 / 0.3), 0 0 40px oklch(0.72 0.16 65 / 0.1);
+  }
+  .glow-amber-sm {
+    box-shadow: 0 0 8px oklch(0.72 0.16 65 / 0.4);
+  }
+
+  /* Guitar string shimmer */
+  .string-shimmer {
+    background: linear-gradient(90deg,
+      oklch(0.55 0.05 80 / 0.6) 0%,
+      oklch(0.75 0.12 70 / 0.9) 50%,
+      oklch(0.55 0.05 80 / 0.6) 100%
+    );
+  }
+
+  /* Card hover lift */
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+  .card-hover:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 8px 32px oklch(0 0 0 / 0.4), 0 0 0 1px oklch(0.72 0.16 65 / 0.15);
+  }
+
+  /* Fretboard wood texture */
+  .fretboard-bg {
+    background: linear-gradient(
+      180deg,
+      oklch(0.22 0.04 45) 0%,
+      oklch(0.18 0.035 40) 50%,
+      oklch(0.22 0.04 45) 100%
+    );
+  }
+
+  /* Badge rarity colors */
+  .rarity-common { @apply text-muted-foreground; }
+  .rarity-rare { color: oklch(0.65 0.18 220); }
+  .rarity-epic { color: oklch(0.65 0.22 300); }
+  .rarity-legendary { color: oklch(0.72 0.16 65); }
+
+  /* Accuracy colors */
+  .accuracy-perfect { color: oklch(0.70 0.18 145); }
+  .accuracy-good { color: oklch(0.72 0.16 65); }
+  .accuracy-miss { color: oklch(0.60 0.22 25); }
+
+  /* Premium badge */
+  .premium-badge {
+    background: linear-gradient(135deg, oklch(0.72 0.16 65), oklch(0.60 0.14 50));
+    @apply text-xs font-semibold px-2 py-0.5 rounded-full;
+    color: oklch(0.12 0.005 260);
+  }
+}
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+@layer utilities {
+  @keyframes pulse-amber {
+    0%, 100% { box-shadow: 0 0 8px oklch(0.72 0.16 65 / 0.4); }
+    50% { box-shadow: 0 0 20px oklch(0.72 0.16 65 / 0.7), 0 0 40px oklch(0.72 0.16 65 / 0.3); }
+  }
+
+  @keyframes note-hit {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes xp-float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-40px); opacity: 0; }
+  }
+
+  @keyframes streak-fire {
+    0%, 100% { transform: scaleY(1) rotate(-2deg); }
+    50% { transform: scaleY(1.1) rotate(2deg); }
+  }
+
+  .animate-pulse-amber { animation: pulse-amber 2s ease-in-out infinite; }
+  .animate-note-hit { animation: note-hit 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
+  .animate-xp-float { animation: xp-float 1s ease-out forwards; }
+  .animate-streak-fire { animation: streak-fire 0.8s ease-in-out infinite; }
+}
+
+/* ─── Component Overrides ───────────────────────────────────────────────────── */
+@layer components {
+  /* Button active scale */
+  button:not(:disabled):active {
+    transform: scale(0.97);
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Input focus glow */
+  input:focus-visible, textarea:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px oklch(0.72 0.16 65 / 0.5);
+  }
+
+  /* Sidebar active item */
+  .sidebar-item-active {
+    @apply bg-sidebar-accent text-sidebar-primary font-medium;
+    border-left: 2px solid oklch(0.72 0.16 65);
+  }
+}
+
+/* ─── Streamdown Markdown Styles ────────────────────────────────────────────── */
+.streamdown-content {
+  @apply text-foreground leading-relaxed;
+}
+.streamdown-content h1, .streamdown-content h2, .streamdown-content h3 {
+  @apply text-primary font-display font-semibold mt-4 mb-2;
+}
+.streamdown-content code {
+  @apply bg-secondary text-primary px-1.5 py-0.5 rounded text-sm font-mono;
+}
+.streamdown-content pre {
+  @apply bg-secondary p-4 rounded-lg overflow-x-auto my-3;
+}
+.streamdown-content ul, .streamdown-content ol {
+  @apply pl-5 my-2 space-y-1;
+}
+.streamdown-content li { @apply list-disc; }
+.streamdown-content ol li { @apply list-decimal; }
+.streamdown-content strong { @apply text-primary font-semibold; }
+.streamdown-content blockquote {
+  @apply border-l-2 border-primary pl-4 italic text-muted-foreground my-3;
+}
